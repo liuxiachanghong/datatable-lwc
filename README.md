@@ -1,18 +1,19 @@
-# Salesforce DX Project: Next Steps
+# Datatable (lwc)
+Some features here I demostrate for the developers, welcome for your feedback.
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Infinite loading (aka. lazy loading)
+In this example, we will demonstrate the implementation of infinite loading using the connectedCallback method. Through various tests, I found that the @wire method is also effective, although it retrieves additional data very quickly. This speed means there's hardly an opportunity to display the lightning spinner, which typically indicates the loading of new data.
 
-## How Do You Plan to Deploy Your Changes?
+## Searchable combobox
+A notable limitation of the official Lightning combobox is that it doesn't permit users to type; they can only select from the provided list. This becomes cumbersome as the list lengthens, making it frustrating to locate a specific item. The method presented here enables typing to search, functioning like a searchable combobox using SLDS syntax. It's particularly useful and recommended when the item list exceeds 5, 6, or around 10 entries.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+## Reference
+### lightning-datatable
+https://developer.salesforce.com/docs/component-library/bundle/lightning-datatable/documentation
 
-## Configure Your Salesforce DX Project
+### lightning-combobox
+https://developer.salesforce.com/docs/component-library/bundle/lightning-combobox/example
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+### slds component Combobox
+https://www.lightningdesignsystem.com/components/combobox/
 
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
