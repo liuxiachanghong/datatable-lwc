@@ -1,0 +1,51 @@
+<template>
+    <div class="table-header slds-p-around_small slds-m-top_small">
+        <div class="table-header-icon">
+            <lightning-icon icon-name="standard:lead" size="small" alternative-text="Lead"></lightning-icon>
+            <lightning-formatted-text class="slds-card__header-title" value="Leads"></lightning-formatted-text>
+            <lightning-formatted-number value={recordCount}></lightning-formatted-number>
+        </div>
+        <div class="table-header-search slds-m-around_x-small">
+            <lightning-input variant="label-hidden" class="slds-m-horizontal_x-small" placeholder="Owner"
+                value={ownerAlias} oncommit={handleOwnerChange}></lightning-input>
+            <div class="slds-combobox_container slds-m-horizontal_x-small">
+                <div class={comboboxClasses} aria-expanded={isOpen} aria-haspopup="listbox" role="combobox">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <input type="text" class="slds-input slds-combobox__input" aria-controls="listbox-id-1"
+                            autocomplete="off" role="textbox" placeholder="Search Lead Source" oninput={handleInput}
+                            onfocus={handleFocus} onblur={handleBlur} value={leadSource} />
+                    </div>
+                    <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+                        <ul class="slds-listbox slds-listbox_vertical" role="listbox">
+                            <template for:each={filteredData} for:item="group">
+                                <li key={group.LeadSource} role="presentation" class="slds-listbox__item">
+                                    <div data-id={group.LeadSource}
+                                        class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_center"
+                                        role="option" onclick={handleSelect}>
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title={group.LeadSource}>{group.LeadSourceName}
+                                                ({group.cnt})</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <lightning-input variant="label-hidden" type="search" class="slds-m-left_xx-small" placeholder="SearchTerm"
+                value={searchTerm} oncommit={handleSearchTermChange}></lightning-input>
+        </div>
+    </div>
+    <div class="outer-div">
+        <div class="custom-datatable" style="position:relative;">
+            <lightning-datatable key-field="id" data={rows} columns={columns} show-row-number-column="true"
+                enable-infinite-loading load-more-offset="20" onloadmore={loadmoreData}></lightning-datatable>
+            <lightning-spinner if:true={isLoading} size="small" alternative-text="Loading"></lightning-spinner>
+        </div>
+    </div>
+    <div lwc:if={isLoading} class="table-footer slds-p-around_x-small slds-align_absolute-center">
+        <lightning-formatted-text class="slds-m-left_small" value="-"></lightning-formatted-text>
+    </div>
+
+</template>

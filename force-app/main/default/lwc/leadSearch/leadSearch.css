@@ -1,0 +1,49 @@
+.custom-datatable {
+    border-top: 1px #dedede solid;
+    height: 420px;
+    /* width : 120%;  when you expand the default size of the datatable */
+    overflow: auto;
+}
+
+:host .slds-docked-form-footer {
+    justify-content: flex-start;
+    /*margin-left: 36%;  when you expand the default size of the datatable */
+}
+
+/* if you expand teh default size of the datatable
+.outer-div {
+    width: 100%;
+    overflow-x: auto;
+}
+*/
+
+.filter-input-container {
+    display:flex;
+}
+
+.table-header {
+    display:flex;
+    align-items: center;
+    background-color: #F3F3F3;
+    border-radius: 4px 4px 0 0;
+    justify-content: space-between;
+}
+
+.table-header-search {
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.table-header-icon {
+    display: flex;
+    align-items: center;
+    gap:0.6rem;
+}
+
+.table-footer {
+    display:flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 0 0 4px 4px;
+}
