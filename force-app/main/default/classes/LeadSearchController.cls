@@ -33,37 +33,6 @@ public with sharing class LeadSearchController {
     }
 
     @AuraEnabled
-    public static List<AggregateResult> getLeadsAggregateResult(String searchTerm, Map<String, String> stringSet, Map<String, DateTime> dateSet) {
-        DateTime lastCreatedDate = dateSet.get('lastCreatedDate');
-        String lastId = stringSet.get('lastId');
-        String ownerAlias = stringSet.get('ownerAlias');
-        String status = stringSet.get('status');     
-        String leadSource = stringSet.get('leadSource');     
-        String query = 'SELECT COUNT(Id) FROM Lead';    
-        List<String> conditions = new List<String>();
-        conditions.add('Status != \'Unqualified\'');
-        conditions.add('IsConverted = false');
-        if (lastCreatedDate != null && String.isNotBlank(lastId)) {
-            conditions.add('(CreatedDate < :lastCreatedDate OR (CreatedDate = :lastCreatedDate AND Id < :lastId))');
-        }
-        if (String.isNotBlank(ownerAlias)) {
-            conditions.add('Owner.Alias = :ownerAlias');
-        }
-        if (String.isNotBlank(leadSource)) {
-            conditions.add('LeadSource = :leadSource');
-        } 
-        if (String.isNotBlank(searchTerm)) {
-            String keyword = '%' + searchTerm + '%';
-            conditions.add('(Company LIKE :keyword OR Email LIKE :keyword OR LastName LIKE :keyword OR FirstName LIKE :keyword)');
-        }    
-        if (!conditions.isEmpty()) {
-            query += ' WHERE ' + String.join(conditions, ' AND ');
-        }
-        system.debug(query);
-        return Database.query(query);
-    }
-
-    @AuraEnabled
     public static List<AggregateResult> getLeadsGroupedResult(String groupBy) {
         String query = 'SELECT COUNT(Id)cnt, ' + string.escapeSingleQuotes(groupBy) + ' FROM Lead';
         query += ' WHERE Status != \'Unqualified\' AND IsConverted = false';

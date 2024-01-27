@@ -1,6 +1,5 @@
 import { LightningElement, track, wire, api } from 'lwc';
 import getLeads from '@salesforce/apex/LeadSearchController.getLeads';
-import getLeadsAggregateResult from '@salesforce/apex/LeadSearchController.getLeadsAggregateResult';
 import getLeadsGroupedResult from '@salesforce/apex/LeadSearchController.getLeadsGroupedResult';
 
 const ACTIONS = [];
@@ -100,20 +99,8 @@ export default class LeadSearch extends LightningElement {
         });
     }
 
-    loadAggregatedResult() {
-        getLeadsAggregateResult({searchTerm: this.searchTerm, stringSet: this.stringSet, dateSet: this.dateSet })
-        .then(data => {
-            this.recordCount = data && data.length ? data[0].expr0 : 0;
-            resolve(data);
-        })
-        .catch(error => {
-            console.error(error);
-        })
-    }
-
     connectedCallback() {
         this.loadConnectedData();
-        this.loadAggregatedResult();
         this.loadGroupedData();
     }
 
